@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Importes de Angular Material (simulado en CSS) */
+/* No hay equivalente directo en CSS, se omite */
+
