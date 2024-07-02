@@ -1,49 +1,49 @@
 import { Component, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../shared/material/material.module';
-import { Producto } from '../interfaces/producto';
 import { MatTableDataSource } from '@angular/material/table';
+import { Usuario } from '../interfaces/usuario';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ProductoService } from '../services/producto.service';
+import { UsuarioService } from '../services/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalProductoComponent } from './modal-producto/modal-producto.component';
+import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
 
 @Component({
-  selector: 'app-producto',
+  selector: 'app-usuarios',
   standalone: true,
   imports: [MaterialModule],
-  templateUrl: './producto.component.html',
-  styleUrl: './producto.component.css'
+  templateUrl: './usuarios.component.html',
+  styleUrl: './usuarios.component.css'
 })
-export class ProductoComponent {
-  columnasTabla: string[] = ["ID","nombre","descripcion","precio","stock","imagen"]
-  data!: MatTableDataSource<Producto>;
-  lstProducto: Producto[] = [];
+export class UsuariosComponent {
+  columnasTabla:string[] = ["ID","nombre","email","username","admin","contrasena","direccion","telefono","fechacreacion","activo"]
+  data!: MatTableDataSource<Usuario>;
+  lstUsuario: Usuario[]= [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private productoService: ProductoService, private dialog: MatDialog) { 
-    this.obtenerProductos();    
+  constructor(private usuarioService: UsuarioService, private dialog: MatDialog) { 
+    this.obtenerUsuarios();    
     // console.log(this.data);
   }
 
-  obtenerProductos(){
-    this.productoService.getProductos().subscribe(productos => {
-      this.lstProducto = productos;
-      this.data = new MatTableDataSource(this.lstProducto);
+  obtenerUsuarios(){
+    this.usuarioService.getUsuarios().subscribe(usuarios => {
+      this.lstUsuario = usuarios;
+      this.data = new MatTableDataSource(this.lstUsuario);
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
-      console.log(this.lstProducto);
+      console.log(this.lstUsuario);
     })
   }
 
-  nuevoProducto(){
-    this.dialog.open(ModalProductoComponent, {
+  nuevoUsuario(){
+    this.dialog.open(ModalUsuarioComponent, {
       disableClose: true
     }).afterClosed().subscribe(data => {
       if(data == true){
-        this.obtenerProductos();
+        this.obtenerUsuarios();
       }
     })
   }

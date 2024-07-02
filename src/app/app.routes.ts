@@ -5,6 +5,8 @@ import { authGuard } from './auth/guards/auth.guard';
 import { VentaComponent } from './dashboard/venta/venta.component';
 import { CategoriaComponent } from './dashboard/categoria/categoria.component';
 import { ProductoComponent } from './dashboard/producto/producto.component';
+import { ReportesComponent } from './dashboard/reportes/reportes.component';
+import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -12,8 +14,10 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             {path: 'venta', component: VentaComponent},
+            {path: 'usuarios', component: UsuariosComponent},
             {path: 'categorias', component: CategoriaComponent},
-            {path: 'productos', component: ProductoComponent}
+            {path: 'productos', component: ProductoComponent},
+            {path: 'reportes', component: ReportesComponent}
         ]
     },
     {path: '', redirectTo: '/login', pathMatch: 'full'},

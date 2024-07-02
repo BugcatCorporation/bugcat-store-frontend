@@ -1,1 +1,24 @@
-<p>modal-categoria works!</p>
+<form [formGroup]="formularioCategoria" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+      <!-- Campo de Nombre -->
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre">
+        <mat-error *ngIf="formularioCategoria.get('nombre')?.errors?.['required']">
+          El nombre es obligatorio.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Campo de Descripción -->
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion"></textarea>
+      </mat-form-field>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="true">Cancelar</button>
+      <button mat-button color="primary" [disabled]="!formularioCategoria.valid">Guardar</button>
+    </mat-dialog-actions>
+  </form>
+  
