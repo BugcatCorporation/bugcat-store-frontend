@@ -5,6 +5,7 @@ import { MaterialModule } from '../../shared/material/material.module';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { timeInterval } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalCategoriaComponent } from './modal-categoria/modal-categoria.component';
 
@@ -17,7 +18,7 @@ import { ModalCategoriaComponent } from './modal-categoria/modal-categoria.compo
 })
 export class CategoriaComponent {
 
-  columnasTabla: string[] = ["ID", "nombre", "descripcion"]
+  columnasTabla: string[] = ["ID", "nombre", "descripcion", "acciones"]
   data!: MatTableDataSource<Categoria>;
   lstCategorias: Categoria[] = [];
 
@@ -47,6 +48,18 @@ export class CategoriaComponent {
     }).afterClosed().subscribe(data => {
       if(data == true){
         this.obtenerCategorias();
+      }
+    })
+  }
+
+  editarCategoria(categoria: Categoria){
+    this.dialog.open(ModalCategoriaComponent, {
+      disableClose: true,
+      data: categoria
+    }).afterClosed().subscribe(resultado => {
+      if(resultado == true){
+        this.obtenerCategorias();
+        
       }
     })
   }

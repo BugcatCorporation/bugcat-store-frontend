@@ -1,24 +1,33 @@
-<form [formGroup]="formularioCategoria" (ngSubmit)="onSubmit()">
-    <mat-dialog-content>
-      <!-- Campo de Nombre -->
-      <mat-form-field appearance="fill">
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre">
-        <mat-error *ngIf="formularioCategoria.get('nombre')?.errors?.['required']">
-          El nombre es obligatorio.
-        </mat-error>
-      </mat-form-field>
-  
-      <!-- Campo de Descripción -->
-      <mat-form-field appearance="fill">
-        <mat-label>Descripción</mat-label>
-        <textarea matInput formControlName="descripcion"></textarea>
-      </mat-form-field>
-    </mat-dialog-content>
-  
-    <mat-dialog-actions>
-      <button mat-button [mat-dialog-close]="true">Cancelar</button>
-      <button mat-button color="primary" [disabled]="!formularioCategoria.valid">Guardar</button>
-    </mat-dialog-actions>
-  </form>
-  
+<h2 mat-dialog-title>{{ tituloAccion }} Categoria</h2>
+
+<mat-dialog-content>
+   <form [formGroup]="formularioCategoria">
+      <mat-grid-list cols="1" rowHeight="80px">
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Nombre</mat-label>
+               <input matInput autocomplete="off" formControlName="nombre">
+               <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Descripción</mat-label>
+               <input matInput autocomplete="off" formControlName="descripcion" type="text">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+
+      </mat-grid-list>
+   </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+   <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+   <button mat-raised-button color="primary" [disabled]="formularioCategoria.invalid"
+      (click)="guardarEditarCategoria()">{{ botonAccion }}</button>
+</mat-dialog-actions>

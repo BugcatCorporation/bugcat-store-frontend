@@ -1,48 +1,86 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from '../../../shared/material/material.module';
 import { Categoria } from '../../interfaces/categoria';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoriaService } from '../../services/categoria.service';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CommonModule } from '@angular/common';
+import { UtilidadService } from '../../../shared/utilidad.service';
 
 @Component({
   selector: 'app-modal-categoria',
   standalone: true,
-  imports: [MaterialModule,ReactiveFormsModule,CommonModule],
+  imports: [MaterialModule, ReactiveFormsModule],
   templateUrl: './modal-categoria.component.html',
   styleUrl: './modal-categoria.component.css'
 })
-export class ModalCategoriaComponent {
+export class ModalCategoriaComponent implements OnInit {
   formularioCategoria: FormGroup;
   tituloAccion: string = "Nueva Categoria";
   botonAccion: string = "Agregar";
-  listaCategorias: Categoria[] = [];
+  // listaCategorias: Categoria[] = [];
 
   constructor(
+    private modalActual: MatDialogRef<ModalCategoriaComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public datosCategoria : Categoria,
+    private fb: FormBuilder,
     private categoriaService: CategoriaService,
-    private dialogRef: MatDialogRef<ModalCategoriaComponent>,
-    private snackBar: MatSnackBar
-  ) {
-    this.formularioCategoria = new FormGroup({
-      nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      descripcion: new FormControl('')
-    });
+    private utilidadService: UtilidadService
+  ){
+    this.formularioCategoria = this.fb.group({
+      idcategoria: [""],
+      nombre: ["", Validators.required],
+      descripcion: ["", Validators.required]
+    })
+
+    if(this.datosCategoria != null){
+      this.tituloAccion = "Editar Categoria";
+      this.botonAccion = "Actualizar";
+    }
+
+    console.log(this.datosCategoria);
   }
 
-  onSubmit() {
-    if (this.formularioCategoria.valid) {
-      const nuevaCategoria: Categoria = this.formularioCategoria.value;
-      this.categoriaService.crearCategoria(nuevaCategoria).subscribe({
-        next: (categoria) => {
-          this.snackBar.open('Categoría creada exitosamente', 'Cerrar', { duration: 3000 });
-          this.dialogRef.close(true); // Cierra el modal y envía `true` como resultado
-        },
-        error: () => {
-          this.snackBar.open('Error al crear la categoría', 'Cerrar', { duration: 3000 });
-        }
-      });
+  ngOnInit():  void {
+    if(this.datosCategoria != null){
+      this.formularioCategoria.patchValue({
+        idcategoria: this.datosCategoria.idcategoria,
+        nombre: this.datosCategoria.nombre,
+        descripcion: this.datosCategoria.descripcion
+      })
     }
+  }
+
+  guardarEditarCategoria(){
+    const categoria: Categoria = {
+      idcategoria: this.formularioCategoria.value.idcategoria,
+      nombre: this.formularioCategoria.value.nombre,
+      descripcion: this.formularioCategoria.value.descripcion
+    }
+
+    if(this.datosCategoria == null){
+      this.categoriaService.crearCategoria(categoria).subscribe({
+        next: (data) => {
+          if(data != null){
+            this.utilidadService.mostrarAlerta("Categoria creada correctamente", "success");
+            this.modalActual.close(true);
+          } else {
+            this.utilidadService.mostrarAlerta("Error al crear la categoria", "error");
+          }
+        }
+      })
+    } else {
+      this.categoriaService.actualizarCategoria(this.datosCategoria.idcategoria!, categoria).subscribe({
+        next:(data) => {
+          if(data != null){
+            this.utilidadService.mostrarAlerta("Categoria actualizada correctamente", "success");
+            this.modalActual.close(true);
+          } else {
+            this.utilidadService.mostrarAlerta("Error al actualizar la categoria", "error");
+          }
+        }
+      })
+    }
+
   }
 }
