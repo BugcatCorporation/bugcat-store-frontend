@@ -23,14 +23,10 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  // login(usuario: string, password: string): boolean {
-  //   if (usuario === 'Aguero' && password === '12345') {
-  //     sessionStorage.setItem('Usuario', 'Aguero');
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  public get currentUserValue(): JwtResponse | null {
+    return this.currentUserSubject.value;
+  }
+
   login(credenciales: Login): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(`${this.apiUrl}/login`, credenciales)
       .pipe(map(response => {
