@@ -1,1 +1,66 @@
-<p>modal-producto works!</p>
+<h2 mat-dialog-title>{{ tituloAccion }} Producto</h2>
+
+<mat-dialog-content>
+   <form [formGroup]="formularioProducto">
+      <mat-grid-list cols="1" rowHeight="80px">
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Nombre</mat-label>
+               <input matInput autocomplete="off" formControlName="nombre">
+               <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Descripción</mat-label>
+               <input matInput autocomplete="off" formControlName="descripcion" type="text">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Precio</mat-label>
+               <input matInput autocomplete="off" formControlName="precio" type="number">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Stock</mat-label>
+               <input matInput autocomplete="off" formControlName="stock" type="number">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Imagen</mat-label>
+               <input matInput autocomplete="off" formControlName="imagen" type="text">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Activo</mat-label>
+               <mat-select formControlName="activo">
+                 <mat-option [value]="true">True</mat-option>
+                 <mat-option [value]="false">False</mat-option>
+               </mat-select>
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+      </mat-grid-list>
+   </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+   <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+   <button mat-raised-button color="primary" [disabled]="formularioProducto.invalid"
+      (click)="guardarEditarProducto()">{{ botonAccion }}</button>
+</mat-dialog-actions>

@@ -5,7 +5,6 @@ import { MaterialModule } from '../../shared/material/material.module';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { timeInterval } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalCategoriaComponent } from './modal-categoria/modal-categoria.component';
 
@@ -27,9 +26,6 @@ export class CategoriaComponent {
 
   constructor(private categoriaService: CategoriaService, private dialog: MatDialog) { 
     this.obtenerCategorias();
-
-    
-    // console.log(this.data);
   }
 
   obtenerCategorias(){
@@ -72,5 +68,4 @@ export class CategoriaComponent {
       this.data.paginator.firstPage();
     }
   }
-
 }

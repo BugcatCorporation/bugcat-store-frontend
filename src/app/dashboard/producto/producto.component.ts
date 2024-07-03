@@ -16,7 +16,7 @@ import { ModalProductoComponent } from './modal-producto/modal-producto.componen
   styleUrl: './producto.component.css'
 })
 export class ProductoComponent {
-  columnasTabla: string[] = ["ID","nombre","descripcion","precio","stock","imagen"]
+  columnasTabla: string[] = ["ID","nombre","descripcion","precio","stock","imagen","acciones"]
   data!: MatTableDataSource<Producto>;
   lstProducto: Producto[] = [];
 
@@ -24,8 +24,7 @@ export class ProductoComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private productoService: ProductoService, private dialog: MatDialog) { 
-    this.obtenerProductos();    
-    // console.log(this.data);
+    this.obtenerProductos();
   }
 
   obtenerProductos(){
@@ -48,6 +47,17 @@ export class ProductoComponent {
     })
   }
 
+  editarCategoria(producto: Producto){
+    this.dialog.open(ModalProductoComponent, {
+      disableClose: true,
+      data: producto
+    }).afterClosed().subscribe(resultado => {
+      if(resultado == true){
+        this.obtenerProductos();
+
+      }
+    })
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.data.filter = filterValue.trim().toLowerCase();
