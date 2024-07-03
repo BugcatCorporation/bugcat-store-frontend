@@ -1,0 +1,41 @@
+<div class="container">
+
+   <mat-card class="loginCard">
+
+      <div class="header">
+         <h2 class="login-text">Login</h2>
+      </div>
+
+      <mat-card-content style="padding-bottom: 15px;">
+
+         <form [formGroup]="formulario" (ngSubmit)="iniciarSesion()" class="form">
+
+            <mat-form-field appearance="fill">
+               <mat-label>Ingrese su Username</mat-label>
+               <input formControlName="usuario" matInput placeholder="Usuario">
+               <mat-icon matSuffix>supervised_user_circle</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field>
+               <mat-label>Ingrese su Password</mat-label>
+               <input formControlName="password" matInput type="password" placeholder="Password" />
+            </mat-form-field>
+
+            <button class="btn-login" mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid">
+               Ingesar <mat-icon matSuffix>login</mat-icon>
+            </button>
+
+         </form>
+
+      </mat-card-content>
+      <mat-card-footer>
+         
+         @if(mostrarLoading){
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+         }
+
+      </mat-card-footer>
+
+   </mat-card>
+
+</div>
