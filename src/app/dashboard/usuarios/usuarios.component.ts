@@ -16,7 +16,7 @@ import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent {
-  columnasTabla:string[] = ["ID","nombre","email","username","admin","contrasena","direccion","telefono","fechacreacion","activo"]
+  columnasTabla:string[] = ["ID","nombre","email","username","contrasena","direccion","telefono","activo"]
   data!: MatTableDataSource<Usuario>;
   lstUsuario: Usuario[]= [];
 
@@ -25,7 +25,6 @@ export class UsuariosComponent {
 
   constructor(private usuarioService: UsuarioService, private dialog: MatDialog) { 
     this.obtenerUsuarios();    
-    // console.log(this.data);
   }
 
   obtenerUsuarios(){

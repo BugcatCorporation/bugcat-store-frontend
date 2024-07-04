@@ -9,7 +9,7 @@ import { Usuario } from '../interfaces/usuario';
 })
 export class UsuarioService {
 
-  private apiUrl = `${environment.endpoint}/api/usuario`;
+  private apiUrl = `${environment.endpoint}/api/usuarios`;
   constructor(private http: HttpClient) { }
 
   getUsuarios(): Observable<Usuario[]>{

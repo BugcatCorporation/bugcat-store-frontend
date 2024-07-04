@@ -3,10 +3,8 @@ export interface Usuario{
     nombre?         : string;
     email?    : string;
     username?    : string;
-    admin?: boolean;
     contrasena?    : number;
     direccion?    : string;
     telefono?    : string;
-    fechacreacion : Date;
     activo: boolean;
 }
