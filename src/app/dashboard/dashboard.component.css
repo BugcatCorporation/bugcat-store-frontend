@@ -1,9 +1,85 @@
-mat-toolbar{
+/* src/app/dashboard/dashboard.component.css */
+
+/* Estilos para la barra de herramientas */
+mat-toolbar {
     background-color: #d7e3ff;
     color: #005cbb;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
-mat-icon{
+/* Estilos para los iconos */
+mat-icon {
     color: #005cbb;
-    /* background-color: #d7e3ff; */
+    cursor: pointer;
+}
+
+/* Contenedor principal del sidenav */
+mat-sidenav-container {
+    height: 100vh;
+    background-color: #f4f7fc;
+}
+
+/* Sidenav y sus elementos */
+mat-sidenav {
+    width: 250px;
+    background-color: #ffffff;
+}
+
+mat-nav-list {
+    padding: 0;
+}
+
+mat-list-item:hover {
+    background-color: #eaf1ff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    display: block;
+}
+
+/* Eliminar el enfoque circular y cambiar a enfoque rectangular */
+mat-list-item:focus, mat-list-item:active {
+    outline: none;
+    box-shadow: none;
+    border-left: 4px solid #005cbb;
+    background-color: #d7e3ff;
+}
+
+/* Contenido principal */
+mat-sidenav-content {
+    padding: 20px;
+    background-color: #f4f7fc;
+}
+
+/* Estilos adicionales para el contenido dentro de mat-sidenav-content */
+mat-card {
+    margin: 20px 0;
+}
+
+/* Botones en la toolbar */
+mat-toolbar-row button {
+    margin-left: 10px;
+}
+
+/* Flex para distribuir los elementos de la toolbar */
+mat-toolbar-row {
+    display: flex;
+    align-items: center;
+}
+
+mat-toolbar-row h1 {
+    flex: 1;
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+mat-toolbar-row label {
+    margin-right: 20px;
+    font-size: 14px;
 }

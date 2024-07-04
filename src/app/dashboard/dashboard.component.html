@@ -1,70 +1,59 @@
+<!-- src/app/dashboard/dashboard.component.html -->
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <h1>Bugcat Capoo</h1>
-
-        <button mat-icon-button>
+        <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
-        </button>
-
-        <span style="flex: 1 1 auto;"></span>
-        <label style="font-size: 14px; margin-right: 20px;">
-            {{ username }} | {{ autoridad }}
-        </label>
-        <button (click)="salir()" mat-icon-button>
-            <mat-icon>logout</mat-icon>
-        </button>
-
+          </button>
+      <h1>Bugcat Capoo</h1>
+      <span style="flex: 1 1 auto;"></span>
+      <label style="font-size: 14px; margin-right: 20px;">
+        {{ username }} | {{ autoridad }}
+      </label>
+      <button (click)="salir()" mat-icon-button>
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar-row>
-</mat-toolbar>
-
-<mat-sidenav-container>
-    <mat-sidenav #sidenav opened="true" mode="side" style="width: 200px;">
-        <mat-nav-list>
-
-            <mat-list-item>
-                <mat-icon matListItemIcon>dashboard</mat-icon>
-                <a mat-line>DashBoard</a>
-            </mat-list-item>
-
-            <mat-list-item routerLinkActive="active" routerLink="/dashboard/usuarios">
-                <mat-icon matListItemIcon>group</mat-icon>
-                <a mat-line>Usuarios</a>
-            </mat-list-item>
-
-            <mat-list-item routerLinkActive="active" routerLink="/dashboard/productos">
-                <mat-icon matListItemIcon>collections_bookmark</mat-icon>
-                <a mat-line>Productos</a>
-            </mat-list-item>
-
-            <mat-list-item routerLinkActive="active" routerLink="/dashboard/venta">
-                <mat-icon matListItemIcon>currency_exchange</mat-icon>
-                <a mat-line>Venta</a>
-            </mat-list-item>
-
-            <mat-list-item routerLinkActive="active" routerLink="/dashboard/categorias">
-                <mat-icon matListItemIcon>edit_note</mat-icon>
-                <a mat-line>Categorias</a>
-            </mat-list-item>
-
-            <mat-list-item routerLinkActive="active" routerLink="/dashboard/reportes">
-                <mat-icon matListItemIcon>edit_note</mat-icon>
-                <a mat-line>Reportes</a>
-            </mat-list-item>
-
-            <!-- <mat-list-item *ngFor="let menu of listaMenus" [routerLink]="menu.url">
-                <mat-icon matListItemIcon>{{ menu.icono }}</mat-icon>
-                <a mat-line>{{menu.nombre}}</a>
-            </mat-list-item> -->
-
-        </mat-nav-list>
-        
+  </mat-toolbar>
+  
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item routerLinkActive="active" routerLink="/dashboard">
+          <mat-icon matListItemIcon>dashboard</mat-icon>
+          <a mat-line>DashBoard</a>
+        </mat-list-item>
+  
+        <mat-list-item routerLinkActive="active" routerLink="/dashboard/usuarios">
+          <mat-icon matListItemIcon>group</mat-icon>
+          <a mat-line>Usuarios</a>
+        </mat-list-item>
+  
+        <mat-list-item routerLinkActive="active" routerLink="/dashboard/productos">
+          <mat-icon matListItemIcon>collections_bookmark</mat-icon>
+          <a mat-line>Productos</a>
+        </mat-list-item>
+  
+        <mat-list-item routerLinkActive="active" routerLink="/dashboard/venta">
+          <mat-icon matListItemIcon>currency_exchange</mat-icon>
+          <a mat-line>Venta</a>
+        </mat-list-item>
+  
+        <mat-list-item routerLinkActive="active" routerLink="/dashboard/categorias">
+          <mat-icon matListItemIcon>edit_note</mat-icon>
+          <a mat-line>Categorias</a>
+        </mat-list-item>
+  
+        <mat-list-item routerLinkActive="active" routerLink="/dashboard/reportes">
+          <mat-icon matListItemIcon>assessment</mat-icon>
+          <a mat-line>Reportes</a>
+        </mat-list-item>
+      </mat-nav-list>
     </mat-sidenav>
-    <hr>
+    
     <mat-sidenav-content>
-        <div style="height: 90vh;">
-            <router-outlet></router-outlet>
-        </div>
-
+      <div style="height: 90vh;">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
-
-</mat-sidenav-container>
+  </mat-sidenav-container>
+  
