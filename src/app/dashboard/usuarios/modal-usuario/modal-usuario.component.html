@@ -1,1 +1,74 @@
-<p>modal-usuario works!</p>
+<h2 mat-dialog-title>{{ tituloAccion }} </h2>
+
+<mat-dialog-content>
+   <form [formGroup]="formularioUsuario">
+      <mat-grid-list cols="1" rowHeight="80px">
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Nombre</mat-label>
+               <input matInput autocomplete="off" formControlName="nombre">
+               <mat-icon matSuffix>fit_screen</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Email</mat-label>
+               <input matInput autocomplete="off" formControlName="email" type="text">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Username</mat-label>
+               <input matInput autocomplete="off" formControlName="username" type="text">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Contraseña</mat-label>
+               <input matInput autocomplete="off" formControlName="contrasena" type="password">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Direccion</mat-label>
+               <input matInput autocomplete="off" formControlName="direccion" type="text">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Telefono</mat-label>
+               <input matInput autocomplete="off" formControlName="telefono" type="text">
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+            <mat-form-field appearance="outline">
+               <mat-label>Activo</mat-label>
+               <mat-select formControlName="activo">
+                 <mat-option [value]="true">True</mat-option>   
+                 <mat-option [value]="false">False</mat-option>
+               </mat-select>
+               <mat-icon matSuffix>edit_square</mat-icon>
+            </mat-form-field>
+         </mat-grid-tile>
+
+      </mat-grid-list>
+   </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+   <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+   <button mat-raised-button color="primary" [disabled]="formularioUsuario.invalid"
+      (click)="guardarEditarUsuario()">{{ botonAccion }}</button>
+</mat-dialog-actions>

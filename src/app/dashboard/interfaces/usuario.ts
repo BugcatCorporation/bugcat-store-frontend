@@ -3,7 +3,7 @@ export interface Usuario{
     nombre?         : string;
     email?    : string;
     username?    : string;
-    contrasena?    : number;
+    contrasena?    : string;
     direccion?    : string;
     telefono?    : string;
     activo: boolean;

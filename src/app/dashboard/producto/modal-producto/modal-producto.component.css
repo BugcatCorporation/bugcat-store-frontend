@@ -1,0 +1,50 @@
+/* modal-producto.component.css */
+
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .mat-dialog-actions button {
+    margin-left: 10px;
+  }
+  
+  .mat-grid-tile {
+    padding: 10px 0 10px 0px;
+  }
+  
+  @media (max-width: 600px) {
+    mat-grid-list {
+      padding: 0 !important;
+    }
+  
+    .mat-dialog-content {
+      padding: 0 15px;
+    }
+  
+    .mat-dialog-actions {
+      flex-direction: column-reverse;
+    }
+  
+    .mat-dialog-actions button {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+  

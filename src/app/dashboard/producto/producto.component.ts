@@ -47,7 +47,7 @@ export class ProductoComponent {
     })
   }
 
-  editarCategoria(producto: Producto){
+  editarProducto(producto: Producto){
     this.dialog.open(ModalProductoComponent, {
       disableClose: true,
       data: producto

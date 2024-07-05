@@ -11,8 +11,9 @@ import { UtilidadService } from '../../../shared/utilidad.service';
   standalone: true,
   imports: [MaterialModule, ReactiveFormsModule],
   templateUrl: './modal-producto.component.html',
-  styleUrl: './modal-producto.component.css'
+  styleUrls: ['./modal-producto.component.css']
 })
+
 export class ModalProductoComponent implements OnInit {
 
   formularioProducto: FormGroup;
@@ -70,42 +71,43 @@ export class ModalProductoComponent implements OnInit {
 
   guardarEditarProducto() {
     if (this.formularioProducto.invalid) {
-      this.utilidadService.mostrarAlerta("Formulario inválido", "error");
-      return;
+       this.utilidadService.mostrarAlerta("Formulario inválido", "error");
+       return;
     }
-
+ 
     const producto: Producto = {
-      idproducto: this.formularioProducto.value.idproducto,
-      nombre: this.formularioProducto.value.nombre,
-      descripcion: this.formularioProducto.value.descripcion,
-      precio: this.formularioProducto.value.precio,
-      stock: this.formularioProducto.value.stock,
-      imagen: this.formularioProducto.value.imagen,
-      activo: this.formularioProducto.value.activo,
+       idproducto: this.formularioProducto.value.idproducto,
+       nombre: this.formularioProducto.value.nombre,
+       descripcion: this.formularioProducto.value.descripcion,
+       precio: this.formularioProducto.value.precio,
+       stock: this.formularioProducto.value.stock,
+       imagen: this.formularioProducto.value.imagen,
+       activo: this.formularioProducto.value.activo,
     }
-
+ 
     if (this.datosProducto == null) {
-      this.productoService.crearProducto(producto).subscribe({
-        next: (data) => {
-          if (data != null) {
-            this.utilidadService.mostrarAlerta("Producto creado correctamente", "success");
-            this.modalActual.close(true);
-          } else {
-            this.utilidadService.mostrarAlerta("Error al crear el producto", "error");
+       this.productoService.crearProducto(producto).subscribe({
+          next: (data) => {
+             if (data != null) {
+                this.utilidadService.mostrarAlerta("Producto creado correctamente", "success");
+                this.modalActual.close(true);
+             } else {
+                this.utilidadService.mostrarAlerta("Error al crear el producto", "error");
+             }
           }
-        }
-      })
+       })
     } else {
-      this.productoService.actualizarProducto(this.datosProducto.idproducto!, producto).subscribe({
-        next: (data) => {
-          if (data != null) {
-            this.utilidadService.mostrarAlerta("Producto actualizado correctamente", "success");
-            this.modalActual.close(true);
-          } else {
-            this.utilidadService.mostrarAlerta("Error al actualizar el producto", "error");
+       this.productoService.actualizarProducto(this.datosProducto.idproducto!, producto).subscribe({
+          next: (data) => {
+             if (data != null) {
+                this.utilidadService.mostrarAlerta("Producto actualizado correctamente", "success");
+                this.modalActual.close(true);
+             } else {
+                this.utilidadService.mostrarAlerta("Error al actualizar el producto", "error");
+             }
           }
-        }
-      })
+       })
     }
-  }
+ }
+ 
 }

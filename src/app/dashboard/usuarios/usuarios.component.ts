@@ -16,7 +16,7 @@ import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent {
-  columnasTabla:string[] = ["ID","nombre","email","username","contrasena","direccion","telefono","activo"]
+  columnasTabla:string[] = ["ID","nombre","email","contrasena","direccion","telefono","activo"]
   data!: MatTableDataSource<Usuario>;
   lstUsuario: Usuario[]= [];
 
@@ -42,6 +42,17 @@ export class UsuariosComponent {
       disableClose: true
     }).afterClosed().subscribe(data => {
       if(data == true){
+        this.obtenerUsuarios();
+      }
+    })
+  }
+
+  editarUsuario(usuario: Usuario){
+    this.dialog.open(ModalUsuarioComponent, {
+      disableClose: true,
+      data: usuario
+    }).afterClosed().subscribe(resultado => {
+      if(resultado == true){
         this.obtenerUsuarios();
       }
     })
