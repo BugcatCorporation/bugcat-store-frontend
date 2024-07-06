@@ -16,15 +16,15 @@ import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent {
-  columnasTabla:string[] = ["ID","nombre","email","contrasena","direccion","telefono","activo"]
+  columnasTabla:string[] = ["ID","nombre","email","contrasena","direccion","telefono","activo","acciones"]
   data!: MatTableDataSource<Usuario>;
   lstUsuario: Usuario[]= [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private usuarioService: UsuarioService, private dialog: MatDialog) { 
-    this.obtenerUsuarios();    
+  constructor(private usuarioService: UsuarioService, private dialog: MatDialog) {
+    this.obtenerUsuarios();
   }
 
   obtenerUsuarios(){
