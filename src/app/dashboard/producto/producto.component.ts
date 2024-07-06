@@ -23,9 +23,12 @@ export class ProductoComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private productoService: ProductoService, private dialog: MatDialog) { 
+  constructor(private productoService: ProductoService, private dialog: MatDialog,) { 
     this.obtenerProductos();
   }
+
+
+
 
   obtenerProductos(){
     this.productoService.getProductos().subscribe(productos => {

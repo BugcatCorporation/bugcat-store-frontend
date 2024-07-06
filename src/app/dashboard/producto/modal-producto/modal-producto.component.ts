@@ -5,11 +5,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Producto } from '../../interfaces/producto';
 import { ProductoService } from '../../services/producto.service';
 import { UtilidadService } from '../../../shared/utilidad.service';
+import { CategoriaService } from '../../services/categoria.service';
+import { Categoria } from '../../interfaces/categoria';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-producto',
   standalone: true,
-  imports: [MaterialModule, ReactiveFormsModule],
+  imports: [MaterialModule, ReactiveFormsModule, CommonModule],
   templateUrl: './modal-producto.component.html',
   styleUrls: ['./modal-producto.component.css']
 })
@@ -20,12 +23,22 @@ export class ModalProductoComponent implements OnInit {
   tituloAccion: string = "Nuevo Producto";
   botonAccion: string = "Agregar"
 
+
+  lstCategoria: Categoria[] = [];
+
+
   constructor(
     private modalActual: MatDialogRef<ModalProductoComponent>,
     @Inject(MAT_DIALOG_DATA) public datosProducto: Producto,
     private fb: FormBuilder,
     private productoService: ProductoService,
-    private utilidadService: UtilidadService
+    private utilidadService: UtilidadService,
+
+
+    private categoriaService: CategoriaService
+
+
+
   ) {
     this.formularioProducto = this.fb.group({
       idcategoria: [""],
@@ -43,18 +56,23 @@ export class ModalProductoComponent implements OnInit {
     }
 
     console.log(this.datosProducto);
+
+    this.obtenerCategorias();
+
   }
 
   ngOnInit(): void {
     if (this.datosProducto != null) {
       this.formularioProducto.patchValue({
-        idcategoria: this.datosProducto.idproducto,
+        idproducto: this.datosProducto.idproducto,
         nombre: this.datosProducto.nombre,
         descripcion: this.datosProducto.descripcion,
         precio: this.datosProducto.precio,
         stock: this.datosProducto.stock,
         imagen: this.datosProducto.imagen,
-        activo: this.datosProducto.activo
+        activo: this.datosProducto.activo,
+        idcategoria: this.datosProducto.idCategoria
+
       })
     }
   }
@@ -73,18 +91,24 @@ export class ModalProductoComponent implements OnInit {
     if (this.formularioProducto.invalid) {
        this.utilidadService.mostrarAlerta("Formulario inválido", "error");
        return;
+
     }
- 
+
+    
+
     const producto: Producto = {
-       idproducto: this.formularioProducto.value.idproducto,
-       nombre: this.formularioProducto.value.nombre,
-       descripcion: this.formularioProducto.value.descripcion,
-       precio: this.formularioProducto.value.precio,
-       stock: this.formularioProducto.value.stock,
-       imagen: this.formularioProducto.value.imagen,
-       activo: this.formularioProducto.value.activo,
+      idproducto: this.formularioProducto.value.idproducto,
+      nombre: this.formularioProducto.value.nombre,
+      descripcion: this.formularioProducto.value.descripcion,
+      precio: this.formularioProducto.value.precio,
+      stock: this.formularioProducto.value.stock,
+      imagen: this.formularioProducto.value.imagen,
+      activo: this.formularioProducto.value.activo,
+      idCategoria: this.formularioProducto.value.idcategoria
     }
- 
+
+    console.log(producto);
+
     if (this.datosProducto == null) {
        this.productoService.crearProducto(producto).subscribe({
           next: (data) => {
@@ -94,6 +118,7 @@ export class ModalProductoComponent implements OnInit {
              } else {
                 this.utilidadService.mostrarAlerta("Error al crear el producto", "error");
              }
+             
           }
        })
     } else {
@@ -109,5 +134,15 @@ export class ModalProductoComponent implements OnInit {
        })
     }
  }
+
+ obtenerCategorias(){
+  this.categoriaService.getCategorias().subscribe(categorias => {
+    this.lstCategoria = categorias;
+
+    console.log(this.lstCategoria);
+  })
+
+ }
+
  
 }

@@ -6,4 +6,5 @@ export interface Producto{
     stock?    : number;
     imagen?    : string;
     activo?    : boolean;
+    idCategoria?    : number;
 }

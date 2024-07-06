@@ -38,6 +38,31 @@
         </mat-form-field>
       </mat-grid-tile>
 
+
+
+
+
+
+
+<mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="idcategoria">
+            <mat-option *ngFor="let categoria of lstCategoria" [value]="categoria.idcategoria">
+              {{ categoria.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>category</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+
+
+
+
+
+
       <mat-grid-tile>
         <mat-form-field appearance="outline">
           <mat-label>Imagen URL</mat-label>
