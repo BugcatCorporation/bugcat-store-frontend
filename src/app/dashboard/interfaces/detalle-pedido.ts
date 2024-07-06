@@ -14,3 +14,8 @@ export interface DetallePedidoCreacion {
   productoId: number;
   pedidoId: number;
 }
+
+export interface DetallePedidoPrePro {
+  precio: number;
+  productoId: number;
+}
