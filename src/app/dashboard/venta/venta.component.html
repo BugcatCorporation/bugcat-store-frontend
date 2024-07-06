@@ -35,3 +35,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<!-- Agregar botón Finalizar Pedido -->
+<button mat-raised-button color="primary" (click)="finalizarPedido()">Finalizar Pedido</button>

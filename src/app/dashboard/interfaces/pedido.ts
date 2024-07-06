@@ -12,7 +12,7 @@ export interface Pedido {
 }
 
 export interface PedidoCreacion {
-  fechaPedido: Date;
+  fechaPedido: String;
   estado: string;
   total: number;
   direccionEnvio: string;

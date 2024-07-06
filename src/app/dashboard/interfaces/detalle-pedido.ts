@@ -8,6 +8,13 @@ export interface DetallePedido {
   producto?: any;
 }
 
+export interface DetallePedidoPrePro {
+  precio: number;
+  productoId: number;
+}
+
+
+//Se crea al crear un peddio
 export interface DetallePedidoCreacion {
   cantidad: number;
   precio: number;
@@ -15,7 +22,3 @@ export interface DetallePedidoCreacion {
   pedidoId: number;
 }
 
-export interface DetallePedidoPrePro {
-  precio: number;
-  productoId: number;
-}

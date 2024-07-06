@@ -60,8 +60,8 @@ export class DashboardComponent implements OnInit {
       { path: '/dashboard/usuarios', icon:'group', title: 'Usuarios', allowedRoles: ['Administrador']},
       { path: '/dashboard/productos', icon:'collections_bookmark',title: 'Productos', allowedRoles: ['Administrador']},
       { path: '/dashboard/venta', icon:'currency_exchange',title: 'Venta', allowedRoles: ['Administrador', 'Usuario']},
-      { path: '/dashboard/categorias', icon:'edit_note',title: 'Categorias', allowedRoles: ['Administrador']},
-      { path: '/dashboard/reportes', icon:'assessment',title: 'Reportes', allowedRoles: ['Administrador', 'Usuario']},
+      { path: '/dashboard/categorias', icon:'edit_note',title: 'Categorias', allowedRoles: ['Administrador','Usuario']},
+      { path: '/dashboard/reportes', icon:'assessment',title: 'Inventario', allowedRoles: ['Administrador']},
     ].filter(item => item.allowedRoles.includes(roles));
   }
 

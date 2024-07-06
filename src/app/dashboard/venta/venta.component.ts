@@ -53,7 +53,6 @@ export class VentaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadVentas();
     this.obtenerProductos();
   }
 
@@ -67,30 +66,9 @@ export class VentaComponent implements OnInit {
     });
   }
 
-  loadVentas(): void {
-    this.pedidoService.getPedidos().subscribe((data: Pedido[]) => {
-      this.ventas = data;
-    });
-  }
 
-  addOrUpdateVenta(): void {
-    if (this.form.valid) {
-      const pedidoCreacion: PedidoCreacion = this.form.value;
-      if (this.editing && this.selectedPedidoId !== null) {
-        this.pedidoService.actualizarPedido(this.selectedPedidoId, pedidoCreacion).subscribe(() => {
-          this.loadVentas();
-          this.form.reset();
-          this.editing = false;
-          this.selectedPedidoId = null;
-        });
-      } else {
-        this.pedidoService.crearPedido(pedidoCreacion).subscribe(() => {
-          this.loadVentas();
-          this.form.reset();
-        });
-      }
-    }
-  }
+
+ 
 
   editVenta(pedido: Pedido): void {
     this.form.patchValue({
@@ -116,11 +94,7 @@ export class VentaComponent implements OnInit {
     this.selectedPedidoId = null;
   }
 
-  deleteVenta(id: number): void {
-    this.pedidoService.eliminarPedido(id).subscribe(() => {
-      this.loadVentas();
-    });
-  }
+
 
   comprarProducto(producto: Producto): void {
     if (!producto.precio || !producto.idproducto) {
@@ -133,15 +107,44 @@ export class VentaComponent implements OnInit {
       cantidad: 1,
       precio: producto.precio,
       productoId: producto.idproducto,
-      pedidoId: 0, // El id del pedido puede ser actualizado cuando se cree el pedido
+      pedidoId: 0, 
       producto: producto
     };
 
     this.detallesPedido.push(detalle);
     console.log('Producto agregado:', producto);
 
-    // Actualizar el MatTableDataSource
     this.dataSource.data = this.detallesPedido;
   }
+  
+  finalizarPedido(): void {
+    const totalPedido = this.detallesPedido.reduce((total, detalle) => total + detalle.precio, 0);
+  
+    const fechaISO = new Date().toISOString();
+  
+    const pedidoCreacion: PedidoCreacion = {
+      fechaPedido: fechaISO,
+      estado: 'en camino', 
+      total: totalPedido,
+      direccionEnvio: 'av. bugcat 123', 
+      usuarioId: 2, 
+      detalles: this.detallesPedido.map(detalle => ({
+        cantidad: 1, 
+        precio: detalle.precio,
+        productoId: detalle.productoId,
+        pedidoId: 0 
+      }))
+    };
+  
+    console.log('Pedido a enviar:', pedidoCreacion);
+    this.pedidoService.crearPedido(pedidoCreacion).subscribe(() => {
+      console.log('Pedido creado exitosamente.');
 
-}
+      this.detallesPedido = [];
+      this.dataSource.data = this.detallesPedido;
+     
+    }, error => {
+      console.error('Error al crear el pedido:', error);
+    });
+  }
+}  
