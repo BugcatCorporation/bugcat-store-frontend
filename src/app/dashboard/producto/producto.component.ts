@@ -27,9 +27,6 @@ export class ProductoComponent {
     this.obtenerProductos();
   }
 
-
-
-
   obtenerProductos(){
     this.productoService.getProductos().subscribe(productos => {
       this.lstProducto = productos;

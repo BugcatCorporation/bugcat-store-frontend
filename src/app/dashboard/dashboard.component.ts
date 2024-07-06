@@ -4,12 +4,13 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MaterialModule, RouterModule, CommonModule],
+  imports: [MaterialModule, RouterModule, ReactiveFormsModule,CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

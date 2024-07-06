@@ -6,11 +6,12 @@ import { AuthService } from '../../services/auth.service';
 import { UtilidadService } from '../../../shared/utilidad.service';
 import Swal from 'sweetalert2';
 import { Login } from '../../interfaces/login';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MaterialModule, ReactiveFormsModule],
+  imports: [MaterialModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -49,13 +50,6 @@ export class LoginComponent {
     } else {
       this.utilidadService.mostrarAlerta('Usuario o contraseña incorrectos', 'Error');
     }
-    // if(this.authService.login(usuario, password)){
-    //   this.mostrarLoading = true;
-    //   this.router.navigate(['/dashboard']);
-    // } else {
-    //   this.utilidadService.mostrarAlerta('Usuario o contraseña incorrectos', 'Error');
-
-    // }
   }
 
 }

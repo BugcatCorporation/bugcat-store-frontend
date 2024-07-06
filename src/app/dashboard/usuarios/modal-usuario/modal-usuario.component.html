@@ -28,7 +28,8 @@
             </mat-form-field>
          </mat-grid-tile>
 
-         <mat-grid-tile style="padding: 10px 0 10px 0px;">
+         <!-- que se muestre el campo solamente cuando contrasena este vacio -->
+         <mat-grid-tile style="padding: 10px 0 10px 0px;" *ngIf="formularioUsuario.get('contrasena')!.value === ''">
             <mat-form-field appearance="outline">
                <mat-label>Contraseña</mat-label>
                <input matInput autocomplete="off" formControlName="contrasena" type="password">
@@ -56,8 +57,8 @@
             <mat-form-field appearance="outline">
                <mat-label>Activo</mat-label>
                <mat-select formControlName="activo">
-                 <mat-option [value]="true">True</mat-option>   
-                 <mat-option [value]="false">False</mat-option>
+                  <mat-option [value]="true">True</mat-option>
+                  <mat-option [value]="false">False</mat-option>
                </mat-select>
                <mat-icon matSuffix>edit_square</mat-icon>
             </mat-form-field>
@@ -69,6 +70,6 @@
 
 <mat-dialog-actions>
    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
-   <button mat-raised-button color="primary" [disabled]="formularioUsuario.invalid"
-      (click)="guardarEditarUsuario()">{{ botonAccion }}</button>
+   <button mat-raised-button color="primary" [disabled]="formularioUsuario.invalid" (click)="guardarEditarUsuario()">{{
+      botonAccion }}</button>
 </mat-dialog-actions>

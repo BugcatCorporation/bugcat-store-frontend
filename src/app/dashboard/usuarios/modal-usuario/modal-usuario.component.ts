@@ -5,11 +5,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Usuario } from '../../interfaces/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { UtilidadService } from '../../../shared/utilidad.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal-usuario',
   standalone: true,
-  imports: [MaterialModule,ReactiveFormsModule],
+  imports: [MaterialModule,ReactiveFormsModule, CommonModule],
   templateUrl: './modal-usuario.component.html',
   styleUrl: './modal-usuario.component.css'
 })

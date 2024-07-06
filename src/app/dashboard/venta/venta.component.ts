@@ -12,6 +12,7 @@ import { DetallePedido, DetallePedidoCreacion, DetallePedidoPrePro } from '../in
 import { MatCardModule } from '@angular/material/card';
 import { MaterialModule } from '../../shared/material/material.module';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-venta',
@@ -29,6 +30,7 @@ export class VentaComponent implements OnInit {
   data!: MatTableDataSource<Producto>;
   lstProducto: Producto[] = [];
   detallesPedido: DetallePedido[] = [];
+  mostrarDetalles = false;
 
   displayedColumns: string[] = ['productoNombre', 'precio']; // Definición de columnas
 
@@ -39,7 +41,9 @@ export class VentaComponent implements OnInit {
     private fb: FormBuilder,
     private pedidoService: PedidoService,
     private productoService: ProductoService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
+    
   ) {
     this.form = this.fb.group({
       fechaPedido: ['', Validators.required],
@@ -49,6 +53,7 @@ export class VentaComponent implements OnInit {
       usuarioId: ['', Validators.required],
       detalles: this.fb.array([])
     });
+    
     this.dataSource = new MatTableDataSource(this.detallesPedido);
   }
 
@@ -102,6 +107,8 @@ export class VentaComponent implements OnInit {
       return;
     }
 
+    
+    this.mostrarDetalles = true;
     const detalle: DetallePedido = {
       iddetallepedido: this.detallesPedido.length + 1,
       cantidad: 1,
@@ -145,6 +152,12 @@ export class VentaComponent implements OnInit {
      
     }, error => {
       console.error('Error al crear el pedido:', error);
+    });
+
+    // Mostrar un alerta de compra realizada
+    this._snackBar.open('¡Compra realizada!', 'Cerrar', {
+      duration: 3000, // Duración de la alerta en milisegundos (3 segundos)
+      panelClass: ['mat-toolbar', 'mat-primary'] // Clases CSS adicionales para el estilo de la alerta
     });
   }
 }  

@@ -1,7 +1,5 @@
 <div class="container">
-
    <mat-card class="loginCard">
-
       <div class="header">
          <h2 class="login-text">Login</h2>
       </div>
@@ -22,20 +20,16 @@
             </mat-form-field>
 
             <button class="btn-login" mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid">
-               Ingesar <mat-icon matSuffix>login</mat-icon>
+               Ingresar <mat-icon matSuffix>login</mat-icon>
             </button>
 
          </form>
 
       </mat-card-content>
       <mat-card-footer>
-         
-         @if(mostrarLoading){
+         <div *ngIf="mostrarLoading">
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-         }
-
+         </div>
       </mat-card-footer>
-
    </mat-card>
-
 </div>

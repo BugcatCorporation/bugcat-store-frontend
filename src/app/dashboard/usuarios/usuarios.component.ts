@@ -16,7 +16,7 @@ import { ModalUsuarioComponent } from './modal-usuario/modal-usuario.component';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent {
-  columnasTabla:string[] = ["ID","nombre","email","contrasena","direccion","telefono","activo","acciones"]
+  columnasTabla:string[] = ["ID","nombre","email","username","contrasena","direccion","telefono","activo","acciones"]
   data!: MatTableDataSource<Usuario>;
   lstUsuario: Usuario[]= [];
 

@@ -1,16 +1,41 @@
+/* Estilos para las tarjetas de productos */
 .example-card {
-  max-width: 400px;
-  margin-bottom: 8px;
-  width: calc(50% - 8px);
-  margin-right: 16px;
+  max-width: 400px; /* Ancho máximo de la tarjeta */
+  width: calc(50% - 12px); /* Ajuste para mostrar 2 tarjetas por fila */
+  margin-bottom: 16px; /* Espacio entre tarjetas */
+  margin-right: 16px; /* Espacio a la derecha de cada tarjeta */
   display: inline-block;
   vertical-align: top;
+  box-sizing: border-box; /* Caja que incluye el relleno y el borde */
 }
 
 .example-card img {
-  width: 100%;
-  height: auto; 
-  max-width: 100%;
-  max-height: 200px; 
-  object-fit: cover; 
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
+  height: auto; /* Altura automática para mantener la proporción */
+  max-height: 200px; /* Altura máxima de la imagen */
+  object-fit: cover; /* Ajuste de la imagen para cubrir el contenedor */
+}
+
+/* Contenedor principal para la lista de productos y detalles del pedido */
+.container {
+  display: flex; /* Contenedor de diseño flexible */
+  justify-content: space-between; /* Distribución del espacio entre los elementos */
+}
+
+.product-list {
+  flex: 1; /* Toma todo el espacio disponible */
+  padding-right: 20px; /* Espaciado a la derecha para separar de los detalles del pedido */
+}
+
+.order-details {
+  flex: 0 0 30%; /* Ancho fijo para los detalles del pedido */
+  margin-top: 16px; /* Espacio superior para separar del contenedor superior */
+}
+
+.order-details table {
+  margin-bottom: 16px; /* Espacio inferior para separar de otros elementos */
+}
+
+.order-details button {
+  margin-top: 16px; /* Espacio superior para separar del elemento anterior */
 }
