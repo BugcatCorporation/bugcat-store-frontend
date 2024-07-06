@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { MaterialModule } from '../../shared/material/material.module';
-import { Pedido, PedidoCreacion } from '../interfaces/pedido';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { PedidoService } from '../services/pedido.service';
 import { DetallePedidoService } from '../services/detallepedido.service';
+import { ProductoService } from '../services/producto.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { Pedido, PedidoCreacion } from '../interfaces/pedido';
+import { Producto } from '../interfaces/producto';
+import { MaterialModule } from '../../shared/material/material.module';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-venta',
   standalone: true,
-  imports: [MaterialModule,CommonModule,ReactiveFormsModule],
+  imports: [MaterialModule, CommonModule, ReactiveFormsModule],
   templateUrl: './venta.component.html',
   styleUrls: ['./venta.component.css']
 })
@@ -21,11 +27,18 @@ export class VentaComponent implements OnInit {
   dataSource: MatTableDataSource<Pedido>;
   editing: boolean = false;
   selectedPedidoId: number | null = null;
+  data!: MatTableDataSource<Producto>;
+  lstProducto: Producto[] = [];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private fb: FormBuilder,
     private pedidoService: PedidoService,
-    private detallePedidoService: DetallePedidoService
+    private detallePedidoService: DetallePedidoService,
+    private productoService: ProductoService,
+    private dialog: MatDialog
   ) {
     this.form = this.fb.group({
       fechaPedido: ['', Validators.required],
@@ -35,17 +48,28 @@ export class VentaComponent implements OnInit {
       usuarioId: ['', Validators.required],
       detalles: this.fb.array([])
     });
-    this.dataSource = new MatTableDataSource(this.ventas); // Inicializar dataSource
+    this.dataSource = new MatTableDataSource(this.ventas);
   }
 
   ngOnInit(): void {
     this.loadVentas();
+    this.obtenerProductos();
+  }
+
+  obtenerProductos() {
+    this.productoService.getProductos().subscribe(productos => {
+      this.lstProducto = productos;
+      this.data = new MatTableDataSource(this.lstProducto);
+      this.data.paginator = this.paginator;
+      this.data.sort = this.sort;
+      console.log(this.lstProducto);
+    });
   }
 
   loadVentas(): void {
     this.pedidoService.getPedidos().subscribe((data: Pedido[]) => {
       this.ventas = data;
-      this.dataSource.data = this.ventas; // Actualizar dataSource
+      this.dataSource.data = this.ventas;
     });
   }
 
@@ -96,5 +120,11 @@ export class VentaComponent implements OnInit {
     this.pedidoService.eliminarPedido(id).subscribe(() => {
       this.loadVentas();
     });
+  }
+
+  comprarProducto(producto: Producto): void {
+    // Aquí puedes implementar la lógica para agregar el producto al carrito de compras o iniciar el proceso de compra
+    console.log('Comprar producto:', producto);
+    // Por ejemplo, podrías abrir un modal para confirmar la compra o agregar el producto a un carrito de compras.
   }
 }

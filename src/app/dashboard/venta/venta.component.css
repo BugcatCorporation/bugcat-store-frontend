@@ -1,27 +1,10 @@
-/* src/app/dashboard/venta/venta.component.css */
-.ventas-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  mat-card {
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  mat-form-field {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  
-  table {
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .mat-card-title {
-    text-align: center;
-  }
-  
+.example-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+  width: calc(50% - 8px); 
+  margin-right: 16px;
+  display: inline-block; 
+  vertical-align: top; 
+}
+
+
